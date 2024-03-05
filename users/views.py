@@ -1,7 +1,9 @@
 from rest_framework import generics, status
+from rest_framework.permissions import IsAuthenticated
 from rest_framework.response import Response
 
 from users.models import User
+from users.permissions import IsOwner
 from users.serializers import UserSerializer
 
 
@@ -18,3 +20,9 @@ class UserRegisterAPIView(generics.CreateAPIView):
             user.set_password(request.data['password'])
             user.save()
             return Response(serializer.data, status=status.HTTP_201_CREATED)
+
+
+class UserRetrieveAPIView(generics.RetrieveAPIView):
+    queryset = User.objects.all()
+    serializer_class = UserSerializer
+    permission_classes = [IsAuthenticated, IsOwner]
