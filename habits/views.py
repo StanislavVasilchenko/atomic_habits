@@ -23,3 +23,9 @@ class HabitListAPIView(generics.ListCreateAPIView):
     def get_queryset(self):
         queryset = self.queryset.filter(user=self.request.user)
         return queryset
+
+
+class HabitDetailAPIView(generics.RetrieveAPIView):
+    queryset = GoodHabit.objects.all()
+    serializer_class = HabitSerializer
+    permission_classes = [IsAuthenticated, IsHabitOwner]
