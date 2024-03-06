@@ -6,4 +6,4 @@ from habits.models import GoodHabit
 class HabitSerializer(serializers.ModelSerializer):
     class Meta:
         model = GoodHabit
-        fields = '__all__'
+        exclude = ['id', 'user']
