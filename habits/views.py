@@ -35,3 +35,9 @@ class HabitUpdateAPIView(generics.UpdateAPIView):
     queryset = GoodHabit.objects.all()
     serializer_class = HabitSerializer
     permission_classes = [IsAuthenticated, IsHabitOwner]
+
+
+class HabitDeleteAPIView(generics.DestroyAPIView):
+    queryset = GoodHabit.objects.all()
+    serializer_class = HabitSerializer
+    permission_classes = [IsAuthenticated, IsHabitOwner]
