@@ -10,3 +10,5 @@ DB_USER = os.getenv('DB_USER')
 
 BROKER_URL = os.getenv('BROKER_URL')
 RESULT_BACKEND = os.getenv('RESULT_BACKEND')
+
+TG_TOKEN = os.getenv('TG_TOKEN')
