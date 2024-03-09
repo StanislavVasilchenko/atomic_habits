@@ -27,6 +27,7 @@ class RelatedHabitValidator:
 
 class HabitsValidator:
     """Валидатор для Полезной привычки. Нельзя выбрать одновременно связанную привычку и вознаграждение"""
+
     def __init__(self, field):
         self.field = field
 
@@ -35,3 +36,14 @@ class HabitsValidator:
         related_habit = value.get('related_habit')
         if reward is not None and related_habit is not None:
             raise ValidationError('У привычки не может быть вознаграждения и приятной привычки ')
+
+
+class HabitsPeriodicity:
+    """ Валидатор для проверки периодичносит выполнения привычки. Не может привышать 7 дней"""
+    def __init__(self, field):
+        self.field = field
+
+    def __call__(self, value):
+        periodicity = value.get('periodicity')
+        if periodicity is not None and periodicity > 7:
+            raise ValidationError('Переиодичность не должна привышать 7 дней')
