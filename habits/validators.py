@@ -1,11 +1,13 @@
 from rest_framework.exceptions import ValidationError
 
 
-class HabitsTimeToCompleteValidator:
-    """Валидатор для времени выполнения. Время выполнения не должно быть больше 120 секунд"""
-
+class HabitsValidatorMixin:
     def __init__(self, field):
         self.field = field
+
+
+class HabitsTimeToCompleteValidator(HabitsValidatorMixin):
+    """Валидатор для времени выполнения. Время выполнения не должно быть больше 120 секунд"""
 
     def __call__(self, value):
         complete_time = value.get('time_to_complete')
@@ -13,11 +15,8 @@ class HabitsTimeToCompleteValidator:
             raise ValidationError('Время выполнение не должно быть больше 120 sec')
 
 
-class RelatedHabitValidator:
+class RelatedHabitValidator(HabitsValidatorMixin):
     """Валидатор для связанной привычки. У связанной привычки должен быть признак приятной привычки"""
-
-    def __init__(self, field):
-        self.fields = field
 
     def __call__(self, value):
         related_habit = value.get('related_habit')
@@ -25,11 +24,8 @@ class RelatedHabitValidator:
             raise ValidationError('Связаной привычкой может быть только приятная привычка')
 
 
-class HabitsValidator:
+class HabitsValidator(HabitsValidatorMixin):
     """Валидатор для Полезной привычки. Нельзя выбрать одновременно связанную привычку и вознаграждение"""
-
-    def __init__(self, field):
-        self.field = field
 
     def __call__(self, value):
         reward = value.get('reward')
@@ -38,10 +34,8 @@ class HabitsValidator:
             raise ValidationError('У привычки не может быть вознаграждения и приятной привычки ')
 
 
-class HabitsPeriodicity:
+class HabitsPeriodicity(HabitsValidatorMixin):
     """ Валидатор для проверки периодичносит выполнения привычки. Не может привышать 7 дней"""
-    def __init__(self, field):
-        self.field = field
 
     def __call__(self, value):
         periodicity = value.get('periodicity')
