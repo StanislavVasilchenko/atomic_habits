@@ -4,16 +4,6 @@ from config import settings
 
 
 class GoodHabit(models.Model):
-    HOUR = 'Раз в час'
-    DAY = 'Раз в день'
-    WEEK = 'РАз в неделю'
-
-    PERIODICITY = [
-        (HOUR, 'Раз в час'),
-        (DAY, 'Раз в день'),
-        (WEEK, 'Раз в неделю'),
-    ]
-
     name = models.CharField(max_length=255, verbose_name='Название привычки')
     user = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE, related_name='user')
     place = models.CharField(max_length=200, verbose_name='место')
@@ -22,7 +12,7 @@ class GoodHabit(models.Model):
     nice_habit = models.BooleanField(default=False, verbose_name='Признак привычки', blank=True, null=True)
     related_habit = models.ForeignKey('self', on_delete=models.CASCADE, related_name='rel_habit', blank=True,
                                       null=True)
-    periodicity = models.CharField(max_length=20, choices=PERIODICITY, verbose_name='переодичность')
+    periodicity = models.PositiveSmallIntegerField(default=1, verbose_name='переодичность')
     reward = models.TextField(verbose_name='вознаграждение', blank=True, null=True)
     time_to_complete = models.SmallIntegerField(verbose_name='время на выполнение')
     is_published = models.BooleanField(default=False, verbose_name='опубликованно')
