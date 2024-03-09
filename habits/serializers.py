@@ -13,5 +13,3 @@ class HabitSerializer(serializers.ModelSerializer):
                       RelatedHabitValidator(field='related_habit'),
                       HabitsValidator(field=['related_habit', 'reward']),
                       HabitsPeriodicity(field='periodicity')]
-
-
