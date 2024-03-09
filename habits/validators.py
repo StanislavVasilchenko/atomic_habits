@@ -31,7 +31,7 @@ class HabitsValidator(HabitsValidatorMixin):
         reward = value.get('reward')
         related_habit = value.get('related_habit')
         if reward is not None and related_habit is not None:
-            raise ValidationError('У привычки не может быть вознаграждения и приятной привычки ')
+            raise ValidationError('У привычки не может быть вознаграждения и приятной привычки')
 
 
 class HabitsPeriodicity(HabitsValidatorMixin):
