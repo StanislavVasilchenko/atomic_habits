@@ -104,6 +104,7 @@ class HabitsTestCase(APITestCase):
                          {'non_field_errors': ['Связаной привычкой может быть только приятная привычка']})
 
     def test_habits_create_time(self):
+        """Тест времени выполнения привычки. Время выполнения не может быть больше 120 секунд"""
         self.client.force_authenticate(user=self.user)
 
         data = {
@@ -122,6 +123,7 @@ class HabitsTestCase(APITestCase):
                          {'non_field_errors': ['Время выполнение не должно быть больше 120 sec']})
 
     def test_habits_periodicity(self):
+        """Тест периодичности привычки. Периодичность не может быть более 7 дней"""
         self.client.force_authenticate(user=self.user)
 
         data = {
@@ -141,6 +143,7 @@ class HabitsTestCase(APITestCase):
                          {'non_field_errors': ['Переиодичность не должна привышать 7 дней']})
 
     def test_habits_update(self):
+        """Тест обновления данных привычки"""
         self.client.force_authenticate(user=self.user)
 
         data = {
@@ -154,6 +157,7 @@ class HabitsTestCase(APITestCase):
         self.assertEqual(response.json().get('name'), 'update_name')
 
     def test_habits_update_not_owner(self):
+        """Только пользователь создаший привычку может ее обновить"""
         self.client.force_authenticate(user=self.user_2)
 
         data = {
