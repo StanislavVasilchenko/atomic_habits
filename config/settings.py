@@ -12,7 +12,7 @@ https://docs.djangoproject.com/en/4.2/ref/settings/
 from datetime import timedelta
 from pathlib import Path
 
-from private_keys import DJANGO_KEY, DB_NAME, DB_USER
+from private_keys import DJANGO_KEY, DB_NAME, DB_USER, BROKER_URL, RESULT_BACKEND
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -160,3 +160,9 @@ SIMPLE_JWT = {
     'ACCESS_TOKEN_LIFETIME': timedelta(minutes=30),
     'REFRESH_TOKEN_LIFETIME': timedelta(days=10),
 }
+
+CELERY_BROKER_URL = BROKER_URL
+CELERY_RESULT_BACKEND = RESULT_BACKEND
+CELERY_TIMEZONE = 'UTC'
+CELERY_TASK_TRACK_STARTED = True
+CELERY_TASK_TIME_LIMIT = 30 * 60
