@@ -41,6 +41,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'drf_yasg',
     'corsheaders',
+    'django_celery_beat',
 
     'rest_framework',
     'rest_framework_simplejwt',
@@ -117,7 +118,7 @@ AUTH_PASSWORD_VALIDATORS = [
 
 LANGUAGE_CODE = 'en-us'
 
-TIME_ZONE = 'UTC'
+TIME_ZONE = 'Europe/Moscow'
 
 USE_I18N = True
 
@@ -163,6 +164,13 @@ SIMPLE_JWT = {
 
 CELERY_BROKER_URL = BROKER_URL
 CELERY_RESULT_BACKEND = RESULT_BACKEND
-CELERY_TIMEZONE = 'UTC'
+CELERY_TIMEZONE = 'Europe/Moscow'
 CELERY_TASK_TRACK_STARTED = True
 CELERY_TASK_TIME_LIMIT = 30 * 60
+
+CELERY_BEAT_SCHEDULE = {
+    'deactivate_user': {
+        'task': 'habits.tasks.telegram_notification',
+        'schedule': timedelta(minutes=1)
+    }
+}
