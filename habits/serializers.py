@@ -1,7 +1,7 @@
 from rest_framework import serializers
 
 from habits.models import GoodHabit
-from habits.validators import HabitsTimeToCompleteValidator, RelatedHabitValidator, HabitsValidator
+from habits.validators import HabitsTimeToCompleteValidator, RelatedHabitValidator, HabitsValidator, HabitsPeriodicity
 
 
 class HabitSerializer(serializers.ModelSerializer):
@@ -11,6 +11,7 @@ class HabitSerializer(serializers.ModelSerializer):
         exclude = ['id', 'user']
         validators = [HabitsTimeToCompleteValidator(field='time_to_complete'),
                       RelatedHabitValidator(field='related_habit'),
-                      HabitsValidator(field=['related_habit', 'reward'])]
+                      HabitsValidator(field=['related_habit', 'reward']),
+                      HabitsPeriodicity(field='periodicity')]
 
 
