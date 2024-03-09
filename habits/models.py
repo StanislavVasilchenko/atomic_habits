@@ -1,3 +1,5 @@
+import datetime
+
 from django.db import models
 
 from config import settings
@@ -16,6 +18,7 @@ class GoodHabit(models.Model):
     reward = models.TextField(verbose_name='вознаграждение', blank=True, null=True)
     time_to_complete = models.SmallIntegerField(verbose_name='время на выполнение')
     is_published = models.BooleanField(default=False, verbose_name='опубликованно')
+    date_of_completion = models.DateField(auto_now_add=True, verbose_name='Дата создания')
 
     def __str__(self):
         return f'{self.user} - {self.name}'
