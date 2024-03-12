@@ -24,7 +24,7 @@ class HabitCreateAPIView(generics.CreateAPIView):
             new_habit.save()
 
 
-class HabitListAPIView(generics.ListCreateAPIView):
+class HabitListAPIView(generics.ListAPIView):
     """Вывод списка всех привычек"""
     queryset = GoodHabit.objects.all()
     serializer_class = HabitSerializer

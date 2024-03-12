@@ -18,10 +18,14 @@ class UserRegisterAPIView(generics.CreateAPIView):
         if serializer.is_valid():
             user = User.objects.create(
                 email=request.data['email'],
+                telegram_id=request.data.get('telegram_id'),
+                phone_number=request.data.get('phone_number')
+
             )
             user.set_password(request.data['password'])
             user.save()
             return Response(serializer.data, status=status.HTTP_201_CREATED)
+        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
 
 class UserRetrieveAPIView(generics.RetrieveAPIView):
