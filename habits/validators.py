@@ -41,3 +41,13 @@ class HabitsPeriodicity(HabitsValidatorMixin):
         periodicity = value.get('periodicity')
         if periodicity is not None and periodicity > 7:
             raise ValidationError('Переиодичность не должна привышать 7 дней')
+
+
+class NiceHabitsValidator(HabitsValidatorMixin):
+    """Валидатор для приятной привычки. У приятной привычки не должно быть поля вознаграждения (reward)"""
+
+    def __call__(self, value):
+        nice_habit = value.get('nice_habit')
+        reward = value.get('reward')
+        if nice_habit and reward:
+            raise ValidationError('У приятной привычки не может быть вознаграждения')
