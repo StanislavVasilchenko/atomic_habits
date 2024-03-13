@@ -16,12 +16,8 @@ class HabitCreateAPIView(generics.CreateAPIView):
     permission_classes = [IsAuthenticated]
 
     def perform_create(self, serializer):
-        """При создании привязывается авторизованный пользователь.
-        Если привычка приятная поле вознаграждения очищается"""
-        new_habit = serializer.save(user=self.request.user)
-        if new_habit.nice_habit:
-            new_habit.reward = None
-            new_habit.save()
+        """При создании привязывается авторизованный пользователь."""
+        serializer.save(user=self.request.user)
 
 
 class HabitListAPIView(generics.ListAPIView):
