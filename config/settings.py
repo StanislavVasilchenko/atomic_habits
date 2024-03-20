@@ -172,6 +172,10 @@ CELERY_BEAT_SCHEDULE = {
     'deactivate_user': {
         'task': 'habits.tasks.telegram_notification',
         'schedule': timedelta(minutes=1)
+    },
+    'activate_user': {
+        'task': 'users.tasks.save_tg_id_in_user',
+        'schedule': timedelta(minutes=1)
     }
 }
 
