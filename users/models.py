@@ -7,6 +7,7 @@ class User(AbstractUser):
 
     email = models.EmailField(unique=True, verbose_name='email address')
     telegram_id = models.IntegerField(verbose_name='Telegram', null=True, blank=True)
+    telegram_username = models.CharField(max_length=255, verbose_name='Telegram_username', null=True, blank=True)
     phone_number = models.CharField(max_length=15, verbose_name='telephone number', null=True, blank=True)
 
     USERNAME_FIELD = 'email'
