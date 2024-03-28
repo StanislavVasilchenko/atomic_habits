@@ -60,3 +60,10 @@ python3 manage.py runserver
 ```
 python3 manage.py test  
 ```
+
+## Запуск проекта через docker-compose
+
+Для запуска через docker-compose выполнить команду находясь в корне проекта:
+```
+docker-compose up
+```
